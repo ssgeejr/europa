@@ -14,8 +14,9 @@
 
 
 	<modules>
-            <module>europaserver</module>
-            <module>europaclient</module>
+            <module>server</module>
+            <module>client</module>
+            <module>adminui</module>
         </modules>
 
 	<properties>
