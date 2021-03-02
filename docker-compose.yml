@@ -10,6 +10,8 @@ services:
             dockerfile: Dockerfile
             args:
                 version: 1.3
+            labels:
+                - "project=europa"
 
     adminui:
         image: europaadminui
@@ -23,6 +25,8 @@ services:
             dockerfile: Dockerfile
             args:
                 version: 1.3
+            labels:
+                - "project=europa"
 
     client:
         image: europaclient
@@ -36,6 +40,8 @@ services:
             dockerfile: Dockerfile
             args:
                 version: 1.3
+            labels:
+                - "project=europa"
 
     db:
         image: mysql:5.6
