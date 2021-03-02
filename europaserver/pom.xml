@@ -10,10 +10,10 @@
 	</parent>
 
 	<artifactId>europaserver</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<build>
-		<finalName>EuropaServer</finalName>
+		<finalName>europaserver</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -24,15 +24,57 @@
 					<fork>true</fork>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.3.1</version>
-				<configuration>
-					<warName>europaserver</warName>
-					<outputDirectory>${project.build.directory}/docker/</outputDirectory>
-				</configuration>
-			</plugin>
+                        <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-dependency-plugin</artifactId>
+                                <executions>
+                                        <execution>
+                                        <id>copy-dependencies</id>
+                                        <phase>prepare-package</phase>
+                                        <goals>
+                                                <goal>copy-dependencies</goal>
+                                        </goals>
+                                        <configuration>
+                                                <outputDirectory>
+                                                ${project.build.directory}/libs
+                                                </outputDirectory>
+                                        </configuration>
+                                        </execution>
+                                </executions>
+                        </plugin>
+                        <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-jar-plugin</artifactId>
+                                <configuration>
+                                        <archive>
+                                        <manifest>
+                                                <addClasspath>true</addClasspath>
+                                                <classpathPrefix>libs/</classpathPrefix>
+                                                <mainClass>
+                                                com.eightonefournorth.europa.server.EuropaServer
+                                                </mainClass>
+                                        </manifest>
+                                        </archive>
+                                </configuration>
+                        </plugin>
+<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <configuration>
+                        <target>
+                            <copy file="target/europaserver.jar" tofile="docker/europaserver.jar"/>
+                        </target>
+                    </configuration>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
 		</plugins>
 	</build>
 

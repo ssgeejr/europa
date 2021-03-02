@@ -25,7 +25,7 @@ do
     fi
 done
 
-echo "BUILDING ArchangeDB"
+echo "BUILDING EuropaServer"
 if [[ $clean == 1 ]]; then
 	echo "cleaning archangeldb containers & images"
 	docker stop archangeldb
@@ -37,7 +37,7 @@ fi
 cd $cwd/archangeldb/docker
 docker build --tag archangeldb .
 
-echo "BUILDING ArchangeMS"
+echo "BUILDING EuropaClient"
 if [[ $clean == 1 ]]; then
         echo "cleaning archangelms images"
 	docker stop archangelms
@@ -52,25 +52,6 @@ cd docker/
 cp ../target/archAngelService.jar .
 docker build --tag archangelms .
 
-
-echo "BUILDING ArchangeUI"
-if [[ $clean == 1 ]]; then
-        echo "cleaning archangelui images"
-	docker stop archangelui
-	docker rm archangelui
-	docker rmi -f archangelui
-	docker rmi -f $(docker images | grep 'archangelui' | awk '{print $3}')
-fi
-cd $cwd/archangelui
-rm -rf docker/*.jar
-mvn clean package
-cd docker
-cp ../target/archAngelFrontEnd.jar .
-docker build --tag archangelui .
-
-
-echo "PULLING Dozzle"
-docker pull amir20/dozzle
 
 if [[ $start == 1 ]]; then
 	echo "Application Built, starting application vai: docker-compose up -d"
