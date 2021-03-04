@@ -16,6 +16,7 @@ CREATE TABLE responses (
 	agent_header VARCHAR(128) NOT NULL
 );
 
+
 INSERT INTO contacts(name,email,hash) VALUES
 ('Some User', 'someuser@mail.com','4d0c733ca9f0f43fcebe3d33cc4ae4e4'),
 ('Another User','anotheruser@dodoo.com','7702b3548f8f64b2cd395745d8f3eaa4'),
