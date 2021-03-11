@@ -25,3 +25,28 @@ document.getElementById("example").innerHTML=txt;
 ### References
 
 https://www.seanmcp.com/articles/how-to-get-the-browser-version-in-javascript/
+
+
+For the unnaturally long startup time with tomcat: 
+
+
+4
+
+Found the answer and it worked...
+
+https://stackoverflow.com/a/26432537/450586
+
+Basically...
+
+Go to the JDK/security folder and edit java.security
+
+in my case: /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
+
+Change
+
+securerandom.source=file:/dev/random
+
+to
+
+securerandom.source=file:/dev/./urandom
+
