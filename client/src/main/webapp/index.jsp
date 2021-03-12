@@ -6,26 +6,30 @@
 <title>Europa Phishing Client</title>
 </head>
 <body>
-<div id="details"></div>
-
-<script type="text/javascript">
-
-txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
-txt+= "<p>Browser Name: " + navigator.appName + "</p>";
-txt+= "<p>Browser Version: " + navigator.appVersion + "</p>";
-txt+= "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
-txt+= "<p>Platform: " + navigator.platform + "</p>";
-txt+= "<p>User-agent header: " + navigator.userAgent + "</p>";
-
-document.getElementById("details").innerHTML=txt;
-
-</script>
 
 <%= new java.util.Date().toString() %>
 <%= request.getHeader("User-Agent") %>
 
-<label value="hellow">
+<hr>
+
+<%@ page import="com.eightonefournorth.europa.client.*" %>
+
+<%
+UserAgentItem uai = new UserAgent().parseUserAgent(request.getHeader("User-Agent"));
+String bv = ""; 
+String bn = ""; 
+String cos = ""; 
+
+bv = uai.getBrowserVer();
+bn = uai.getBrowserName();
+cos = uai.getClientOS();
 
 
+%>
+<ul>
+	<li>Browser Name: <%= bn %></li>
+	<li>Browser Version: <%= bv %></li>
+	<li>Client OS: <%= cos %></li>
+</ul>
 </body>
 </html>

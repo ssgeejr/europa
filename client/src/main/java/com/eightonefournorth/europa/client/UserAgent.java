@@ -1,5 +1,7 @@
 package com.eightonefournorth.europa.client;
 
+import java.sql.*;
+
 public class UserAgent {
 
 	public UserAgent() {
@@ -30,7 +32,27 @@ public class UserAgent {
 		uai.setBrowserVer(browserVer);
 		uai.setClientOS(fetchClientOS(userAgent));
 		System.out.println(uai);
+
+		saveData(uai);
 		return uai;
+	}
+
+	private void saveData(UserAgentItem uai){
+		Connection conn = null;
+		try{
+                // db parameters
+                	String url       = "jdbc:mysql://europadb:3306/europa";
+                	String user      = "europa";
+                	String password  = "silverlining";
+                	conn = DriverManager.getConnection(url, user, password);
+                	System.out.println("Connection is Open: [" + !conn.isClosed() + "]");
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			try {
+	               		if (conn != null) conn.close();
+			}catch(Exception ex){}
+		}
 	}
 
 	private String fetchClientOS(String au) {
