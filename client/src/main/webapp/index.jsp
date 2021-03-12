@@ -15,6 +15,13 @@
 <%@ page import="com.eightonefournorth.europa.client.*" %>
 
 <%
+
+String hash = request.getParameter("hid");
+
+System.out.println("HASH: " + hash);
+
+if (hash == null || hash.length() != 32) return; 
+
 UserAgentItem uai = new UserAgent().parseUserAgent(request.getHeader("User-Agent"));
 String bv = ""; 
 String bn = ""; 
