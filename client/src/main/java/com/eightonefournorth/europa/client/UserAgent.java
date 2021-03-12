@@ -39,6 +39,7 @@ public class UserAgent {
 
 	private void saveData(UserAgentItem uai){
 		Connection conn = null;
+		PreparedStatement pstmt = null;
 		try{
                 // db parameters
                 	String url       = "jdbc:mysql://europadb:3306/europa";
@@ -46,6 +47,21 @@ public class UserAgent {
                 	String password  = "silverlining";
                 	conn = DriverManager.getConnection(url, user, password);
                 	System.out.println("Connection is Open: [" + !conn.isClosed() + "]");
+
+			pstmt = conn.prepareStatement("insert into response(hash,browser_version,browser_name,platform) values(?,?,?,?)");
+
+			pstmt.setString(1,"AAAAABBBBBCCCCCDDDDDEEEEEFFFFF");
+			pstmt.setString(2, uai.getBrowserVer());
+			pstmt.setString(3, uai.getBrowserName());
+			pstmt.setString(4, uai.getClientOS());
+
+			pstmt.executeUpdate();
+			
+			System.out.println("Insert pushed ... ");
+
+
+
+
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}finally{

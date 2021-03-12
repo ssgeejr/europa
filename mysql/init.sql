@@ -13,15 +13,13 @@ CREATE TABLE contacts (
             hash VARCHAR(32) NOT NULL
 );
 
-CREATE TABLE responses (
+CREATE TABLE response (
         reseponseid int AUTO_INCREMENT primary key NOT NULL,
         hash VARCHAR(32) NOT NULL,
         event_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        browser_codename VARCHAR(32) NOT NULL,
+        browser_version VARCHAR(32) NOT NULL,
         browser_name VARCHAR(32) NOT NULL,
-        platform VARCHAR(16) NOT NULL,
-        browser_version VARCHAR(128) NOT NULL,
-        agent_header VARCHAR(128) NOT NULL
+        platform VARCHAR(16) NOT NULL
 );
 
 INSERT INTO company(name) VALUES('SERPENT');
