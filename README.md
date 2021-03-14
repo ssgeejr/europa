@@ -50,3 +50,12 @@ to
 
 securerandom.source=file:/dev/./urandom
 
+
+
+## MYSQL
+
+select timezone: 
+
+`SELECT @@GLOBAL.time_zone, @@SESSION.time_zone;`
+
+

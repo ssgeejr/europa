@@ -1,3 +1,7 @@
+
+
+SET GLOBAL time_zone = 'America/Chicago';
+
 set @CID = -1;
 
 CREATE TABLE company (
